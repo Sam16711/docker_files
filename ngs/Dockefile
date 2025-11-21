@@ -1,0 +1,3 @@
+FROM python:3.8.13-slim-buster
+WORKDIR /
+RUN pip install matplotlib==3.4.3 pandas==1.3.3 numpy=1.22.3 

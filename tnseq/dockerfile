@@ -1,0 +1,32 @@
+FROM rocker/r-ver:4.1.1
+CMD ["bash"]
+WORKDIR /tmp
+RUN apt-get update && \
+apt-get install -y git subread bowtie samtools libgtk-3-dev cutadapt python3-dev python3-pip python3-setuptools r-base r-base-dev r-base-core libeigen3-dev && \
+apt-get clean && pip3 install transit1 rpy2 && pip3 install --upgrade numpy
+
+RUN install2.r --error \
+    ggplot2 \
+    optparse \
+    ggplot2 \
+    pheatmap \
+    ggfortify \
+    dplyr \
+    tidyr \
+    Rmisc \
+    MASS \
+    pscl \
+    corrplot \ 
+    gplots
+RUN git clone https://github.com/lh3/bwa.git && \
+cd bwa; make
+#./bwa index ref.fa && \
+#./bwa mem ref.fa read-se.fq.gz | gzip -3 > aln-se.sam.gz && \
+#./bwa mem ref.fa read1.fq read2.fq | gzip -3 > aln-pe.sam.gz
+#RUN R -e "install.packages('BiocManager', 'optparse', 'ggplot2', 'pheatmap', 'ggfortify', 'dplyr', 'tidyr', 'tidyverse', 'rmarkdown', 'RColorBrewer'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+#RUN R -e "install.packages('optparse', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+#RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+#RUN R -e "install.packages('pheatmap', dependencies=TRUE, repos='http://cran.rstudio.com/'); if (!library(pheatmap, logical.return=T)) quit(status=10)"
+#RUN R -e "install.packages('ggfortify', dependencies=TRUE, repos='http://cran.rstudio.com/'); if (!library(ggfortify, logical.return=T)) quit(status=10)"
+#RUN R -e "install.packages('dplyr', dependencies=TRUE, repos='http://cran.rstudio.com/'); if (!library(dplyr, logical.return=T)) quit(status=10)"
+#RUN R -e "install.packages('tidyr', dependencies=TRUE, repos='http://cran.rstudio.com/'); if (!library(tidyr, logical.return=T)) quit(status=10)"
