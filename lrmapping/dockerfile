@@ -1,6 +1,5 @@
 FROM informationsea/bioconda:3
 RUN conda install -c bioconda longshot==v0.3.5
-RUN conda install -c plotly plotly-orca
 
 FROM rocker/r-ver:4.1.1
 
@@ -34,10 +33,9 @@ RUN apt-get update \
     libjpeg-dev \
     && apt-get clean && pip3 install --upgrade pip && pip install matplotlib pandas numpy biopython
 
-RUN R -e "install.packages(c('BiocManager', 'optparse', 'ggplot2', 'methods', 'readr','scales','rtracklayer','dplyr','GenomicRanges','stringr','Biobase'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('BiocManager', 'optparse', 'ggplot2', 'methods', 'magrittr', 'swne', 'fs', 'DT', 'gridExtra', 'Seurat', 'heatmap3', 'installr', 'reshape', 'tidyr', 'tidyverse', 'rmarkdown', 'RColorBrewer', 'plotly', 'msigdbr','ggrepel', 'directlabels', 'DT', 'karyoploteR', 'flexdashboard', 'heatmaply', 'statmod', 'optparse'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
-RUN R -e "BiocManager::install(c('QDNAseq'))"
-RUN R -e 'remotes::install_github("asntech/QDNAseq.hg38@main")'
+RUN R -e "BiocManager::install(c('Limma', 'edgeR', 'ChIPseeker', 'soGGi', 'rGREAT', 'Rsamtools', 'rtracklayer', 'MotifDb', 'tracktables', 'Biostrings', 'Rsubread', 'tximport', 'ChIPQC', 'EBSeq', 'blockmodeling', 'digest', 'DESeq2', 'biomaRt', 'gage', 'pathview', 'affy', 'sva', 'rgl', 'clusterProfiler', 'WGCNA', 'GenomicAlignments', 'GenomicRanges', 'org.Hs.eg.db', 'org.Mm.eg.db', 'TxDb.Hsapiens.UCSC.hg38.knownGene'))"
 
 ##############
  ## Clean up
